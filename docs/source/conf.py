@@ -26,9 +26,12 @@ copyright = '2018, Albert Liu'
 author = 'Albert Liu'
 
 # The short X.Y version
-version = '0.0'
+version = '0.0' # 0.1 when aiohttp functions are included
+# And examples are more fleshed out
+# and tests are in place
+
 # The full version, including alpha/beta/rc tags
-release = 'v0.0.1'
+release = 'v0.0.2'
 
 
 # -- General configuration ---------------------------------------------------

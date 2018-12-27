@@ -4,23 +4,23 @@ API
 These functions are general ``asyncio`` helper functions available at the root level of the package.
 
 ..  py:decorator:: boundio.task
-	boundio.asyncio.task( *args, **kwargs )
+	boundio.asynchronous.task( *args, **kwargs )
 
-	*Equivalent to* :py:func:`boundio.asyncio.tasks.task`.
+	*Equivalent to* :py:func:`boundio.asynchronous.tasks.task`.
 
 	Adds an asynchronous function to the global task list, with arguments specified by *args* and *kwargs*.
 
 ..  py:function:: boundio.run_tasks
-	boundio.asyncio.run_tasks( *tasks )
+	boundio.asynchronous.run_tasks( *tasks )
 
-	*Blocking function, equivalent to* :py:func:`boundio.asyncio.tasks.run_tasks`.
+	*Blocking function, equivalent to* :py:func:`boundio.asynchronous.tasks.run_tasks`.
 
 	Runs a list of tasks. Also runs all tasks marked with the :py:func:`boundio.task` decorator.
 
 ..  py:function:: boundio.execute_async
-	boundio.asyncio.execute_async( func, *args, **kwargs )
+	boundio.asynchronous.execute_async( func, *args, **kwargs )
 
-	*Asynchronous function, equivalent to* :py:func:`boundio.asyncio.utils.execute_async`.
+	*Asynchronous function, equivalent to* :py:func:`boundio.asynchronous.utils.execute_async`.
 
 	Coroutine function wrapper for an arbitrary function that may or may not be a coroutine function itself.
 
@@ -28,11 +28,11 @@ These functions are general ``asyncio`` helper functions available at the root l
 -----------------
 ..  py:module:: boundio.stdin
 
-This subpackage is equivalent to :py:mod:`boundio.asyncio.raw_io.stdin`.
+This subpackage is equivalent to :py:mod:`boundio.asynchronous.raw_io.stdin`.
 
 ..  py:function:: boundio.stdin.input_async( prompt [, until='\n', encoding='utf8'] )
 
-	*Asynchronous function, equivalent to* :py:func:`boundio.asyncio.raw_io.stdin.input_async`
+	*Asynchronous function, equivalent to* :py:func:`boundio.asynchronous.raw_io.stdin.input_async`
 
 	Asynchronously reads from standard input until the sequence in ``until`` is reached.
 
@@ -64,7 +64,7 @@ This subpackage is equivalent to :py:mod:`boundio.asyncio.raw_io.stdin`.
 
 .. 	function:: boundio.stdin.stdin_stream( [line_prompt='', sep='\n', encoding='utf8' ] )
 
-	*Asynchronous generator function, equivalent to* :py:func:`boundio.asyncio.raw_io.stdin.input_async`
+	*Asynchronous generator function, equivalent to* :py:func:`boundio.asynchronous.raw_io.stdin.input_async`
 
 	Asynchronously yields data in blocks from standard input, where each block is a sequence of characters ending with *sep*
 
@@ -92,17 +92,17 @@ This subpackage is equivalent to :py:mod:`boundio.asyncio.raw_io.stdin`.
 
 	For more examples, see :py:mod:`boundio.examples`.
 
-``boundio.asyncio``
+``boundio.asynchronous``
 -------------------
 This subpackage includes functions for interacting with raw IO asynchronously.
-<!-- For more information on this subpackage, see the :py:mod:`boundio.asyncio` documentation. -->
+..  For more information on this subpackage, see the :py:mod:`boundio.asynchronous` documentation.
 
 ``boundio.websockets``
 ----------------------
 .. py:currentmodule:: boundio.websockets
 
 This subpackage includes functions for reading from sockets asynchronously.
-<!-- For more information on this subpackage, see the :py:mod:`boundio.websockets` documentation. -->
+..  For more information on this subpackage, see the :py:mod:`boundio.websockets` documentation.
 The following are only the public functions in the package.
 
 ..  py:function::
