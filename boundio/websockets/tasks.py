@@ -1,7 +1,8 @@
 import asyncio
-from boundio.asyncio.queues import yield_queue, producer_queue
-from boundio.asyncio.raw_io import write_file
-from boundio.asyncio.tasks import run_tasks
+from boundio.websockets.process import process_socket
+from boundio.asynchronous.queues import yield_queue, producer_queue
+from boundio.asynchronous.raw_io import write_file
+from boundio.asynchronous.tasks import run_tasks
 from boundio.websockets.utils import process_frame, connect
 
 # Simplest way to interact with a socket, returns a coroutine that can be directly used as a task

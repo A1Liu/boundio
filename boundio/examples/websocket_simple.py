@@ -13,7 +13,7 @@ def on_close(socket):
     return ']'
 
 url = '' # Websocket URL to connect to
-output_path = '' #
+output_path = ''
 
 if __name__ == '__main__':
     run_socket(url, output_path, on_open=on_open, on_message=on_message, on_close=on_close, time_limit=10)

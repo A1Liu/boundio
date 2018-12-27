@@ -1,10 +1,10 @@
-from boundio.asyncio.raw_io.sockets import read_socket
-from boundio._lib.item_codes import SKIP_ITEM, CLOSE_STREAM
+from boundio.asynchronous.raw_io.sockets import read_socket
+from boundio.item_codes import SKIP_ITEM, CLOSE_STREAM, END_IO
 from boundio.websockets.utils import connect
-from boundio.asyncio.utils import execute_async
+from boundio.asynchronous.utils import execute_async
 
 # Processes a socket asynchronously
-async def process_socket(socket, on_open=None, on_close=None, on_message=None, time_limit=None ):
+async def process_socket( socket, on_open=None, on_close=None, on_message=None, time_limit=None ):
     """
     This is a low-level coroutine that processes a socket object asynchronously and yields
     the result of that processing. Skips instances of boundio.item_codes.SKIP_ITEM,
@@ -25,18 +25,24 @@ async def process_socket(socket, on_open=None, on_close=None, on_message=None, t
         close, item = await __handle_func(on_open, socket)
         if item is not SKIP_ITEM:
             yield item
+            if item is END_IO: return
+
 
     # Run stuff per message
     if close is False:
         async for item in __handle_message(socket, time_limit, on_message):
             yield item
+            if item is END_IO: return
 
     # Run stuff on close
     if on_close is not None:
         item = await execute_async(on_close, socket) # Executes the function given as if it were asynchronous
-        if item is not SKIP_ITEM: yield item
+        if item is not SKIP_ITEM:
+            yield item
+            if item is END_IO: return
+    yield END_IO
 
-async def __handle_messages(socket, time_limit, on_message):
+async def __handle_message(socket, time_limit, on_message):
     if on_message is not None:
         async for frame in read_socket(socket,time_limit):
             close, item = await __handle_func(on_message, socket, frame)
