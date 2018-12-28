@@ -97,29 +97,29 @@ This subpackage is equivalent to :py:mod:`boundio.asynchronous.raw_io.stdin`.
 This subpackage includes functions for interacting with raw IO asynchronously.
 ..  For more information on this subpackage, see the :py:mod:`boundio.asynchronous` documentation.
 
-``boundio.websockets``
+``boundio.sockets``
 ----------------------
-.. py:currentmodule:: boundio.websockets
+.. py:currentmodule:: boundio.sockets
 
 This subpackage includes functions for reading from sockets asynchronously.
-..  For more information on this subpackage, see the :py:mod:`boundio.websockets` documentation.
+..  For more information on this subpackage, see the :py:mod:`boundio.sockets` documentation.
 The following are only the public functions in the package.
 
 ..  py:function::
-	boundio.websockets.get_socket_task
-	boundio.websockets.tasks.get_socket_task(url [, on_open=None, on_close=None, on_message=print, time_limit=None] )
+	boundio.sockets.get_socket_task
+	boundio.sockets.tasks.get_socket_task(url [, on_open=None, on_close=None, on_message=print, time_limit=None] )
 
 	*Asynchronous generator function.*
 
 	Creates a socket object in a context manager and
-	uses :py:func:`boundio.websockets.process_socket` to yield data.
+	uses :py:func:`boundio.sockets.process_socket` to yield data.
 
 	:param str url: Url of websocket to connect to.
 
-	*Remaining parameters are passed directly to* :py:func:`boundio.websockets.process_socket`.
+	*Remaining parameters are passed directly to* :py:func:`boundio.sockets.process_socket`.
 
-..  py:function:: boundio.websockets.get_socket_tasks
-	boundio.websockets.tasks.get_socket_tasks( url, path [, on_open=None, on_close=None, on_message=print, time_limit=None] )
+..  py:function:: boundio.sockets.get_socket_tasks
+	boundio.sockets.tasks.get_socket_tasks( url, path [, on_open=None, on_close=None, on_message=print, time_limit=None] )
 
 	Returns a *producer, consumer* awaitable pair that can be passed to :py:func:`boundio.run_tasks`. The producer
 	takes information from the socket and adds it to an :py:class:`asyncio.Queue` instance. The consumer removes
@@ -129,24 +129,24 @@ The following are only the public functions in the package.
 	:param path: Path of file to write data to.
 	:type path: Path, str, or other Path-like
 
-	*Remaining parameters are passed directly to* :py:func:`boundio.websockets.process_socket`.
+	*Remaining parameters are passed directly to* :py:func:`boundio.sockets.process_socket`.
 
-..  py:function:: boundio.websockets.run_socket
-	boundio.websockets.tasks.run_socket(url, path [, on_open=None, on_close=None, on_message= :py:func:`boundio.websockets.process_frame`, time_limit=None] )
+..  py:function:: boundio.sockets.run_socket
+	boundio.sockets.tasks.run_socket(url, path [, on_open=None, on_close=None, on_message= :py:func:`boundio.sockets.process_frame`, time_limit=None] )
 
 	*Blocking function.*
 
 	Runs a single *producer, consumer* awaitable pair as two concurrent tasks. Convenience function to run the result
-	of a single call of :py:func:`boundio.websockets.get_socket_tasks`
+	of a single call of :py:func:`boundio.sockets.get_socket_tasks`
 
 	:param str url: Url of websocket to connect to.
 	:param path: Path of file to write data to.
 	:type path: Path, str, or other Path-like
 
-	*Remaining parameters are passed directly to* :py:func:`boundio.websockets.process_socket`.
+	*Remaining parameters are passed directly to* :py:func:`boundio.sockets.process_socket`.
 
-..  py:function:: boundio.websockets.process_socket
-	boundio.websockets.process.process_socket(socket [, on_open=None, on_close=None, on_message=None, time_limit=None] )
+..  py:function:: boundio.sockets.process_socket
+	boundio.sockets.process.process_socket(socket [, on_open=None, on_close=None, on_message=None, time_limit=None] )
 
 	*Asynchronous generator function.*
 
@@ -157,7 +157,7 @@ The following are only the public functions in the package.
 	*on_close*.
 
 	**NOTE:** This function does not close the socket after exiting.
-	You need to do that yourself or use a function that does, like :py:func:`boundio.websockets.get_socket_task`.
+	You need to do that yourself or use a function that does, like :py:func:`boundio.sockets.get_socket_task`.
 
 	:param socket: Open socket object to pull data from.
 	:param on_open: Function to run on opening the socket. Takes the socket as parameters and returns text that should be yielded.
@@ -169,8 +169,8 @@ The following are only the public functions in the package.
 	:param time_limit: How long to keep the socket open for. If None, the socket will stay open until *on_open* or *on_message* return an instance of :py:class:`boundio.item_codes.CLOSE_STREAM`, the stream times out, or an error is raised.
 	:type time_limit: int or None
 
-..  py:function:: boundio.websockets.process_frame
-	boundio.websockets.utils.process_frame( socket,frame )
+..  py:function:: boundio.sockets.process_frame
+	boundio.sockets.utils.process_frame( socket,frame )
 
 	The default function for processing frames from a websocket. Returns the frame compressed to a single line with a trailing
 	newline character.
