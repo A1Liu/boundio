@@ -1,7 +1,7 @@
-from boundio.examples import get_example_code
+from boundio.examples.utils import get_example_code
 source = get_example_code(__file__)
 
-from boundio.websockets import run_socket
+from boundio.sockets import run_socket
 
 def on_open(socket):
     return '['

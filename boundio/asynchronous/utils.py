@@ -6,3 +6,7 @@ async def execute_async(func,*args,**kwargs):
         return await obj
     except TypeError:
         return obj
+
+async def consume_source(source):
+    async for item in source:
+        pass

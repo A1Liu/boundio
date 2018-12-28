@@ -1,6 +1,6 @@
 from boundio.asynchronous.raw_io.sockets import read_socket
 from boundio.item_codes import SKIP_ITEM, CLOSE_STREAM, END_IO
-from boundio.websockets.utils import connect
+from websockets.client import connect
 from boundio.asynchronous.utils import execute_async
 
 # Processes a socket asynchronously
@@ -30,7 +30,7 @@ async def process_socket( socket, on_open=None, on_close=None, on_message=None, 
 
     # Run stuff per message
     if close is False:
-        async for item in __handle_message(socket, time_limit, on_message):
+        async for item in __handle_messages(socket, time_limit, on_message):
             yield item
             if item is END_IO: return
 
@@ -42,9 +42,9 @@ async def process_socket( socket, on_open=None, on_close=None, on_message=None, 
             if item is END_IO: return
     yield END_IO
 
-async def __handle_message(socket, time_limit, on_message):
+async def __handle_messages(socket, time_limit, on_message):
     if on_message is not None:
-        async for frame in read_socket(socket,time_limit):
+        async for frame in read_socket(socket, time_limit):
             close, item = await __handle_func(on_message, socket, frame)
             if item is not SKIP_ITEM:
                 yield item

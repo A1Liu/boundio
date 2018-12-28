@@ -6,9 +6,10 @@ class ITEM_CODE():
 
 # Go to on_close
 class CLOSE_STREAM(ITEM_CODE):
-    def __init(self, frame):
+    def __init__(self, frame):
         super(CLOSE_STREAM,self).__init__("boundio.item_codes.CLOSE_SOCKET")
         self.frame = frame
+
     def __str__(self):
         return str(self.frame)
 

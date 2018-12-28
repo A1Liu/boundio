@@ -1,10 +1,10 @@
-from boundio.examples import get_example_code
+from boundio.examples.utils import get_example_code
 source = get_example_code(__file__)
 
 from boundio.stdin import stdin_stream
-import boundio
+import boundio as bio
 
-@boundio.task() # Add task to task list
+@bio.task() # Add task to task list
 async def basic_echo():
     async for line in stdin_stream():
         line = line[:-1]
@@ -12,4 +12,6 @@ async def basic_echo():
         print(line)
 
 if __name__ == '__main__':
-    boundio.run_tasks()
+    bio.run_tasks()
+else:
+    bio.clear_tasks()

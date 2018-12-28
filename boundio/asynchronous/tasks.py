@@ -2,13 +2,36 @@ import asyncio
 
 task_list = []
 
+class TaskList():
+
+    def __init__(self, task_list=[]):
+        self.tasks = task_list
+
+    def add_task(self, func, args, kwargs):
+        self.tasks.append( (func,args,kwargs) )
+
+    def clear_tasks(self):
+        self.tasks = []
+
+    def get_functions(self):
+        return [func for func, args, kwargs in self.tasks]
+
+    def get_tasks(self):
+        tasks = [func(*args,**kwargs) for func,args,kwargs in self.tasks]
+        self.clear_tasks()
+        return tasks
+
+task_list = TaskList()
+
+clear_tasks = task_list.clear_tasks
+
 def task(*args,**kwargs):
     # Adds an asynchronous function to the task list
     # so that it will be run when run_tasks is called
     global task_list
     def decorator(func):
         # Add function & arguments to the task list
-        task_list.append( ( func, args, kwargs.copy() ) )
+        task_list.add_task( func,args,kwargs )
         return func
     return decorator
 
@@ -18,7 +41,7 @@ def run_tasks( *tasks ):
     global task_list
 
     # Create tasks right before running
-    tasks = list(tasks) + [func(*args,**kwargs) for func,args,kwargs in task_list]
+    tasks = list(tasks) + task_list.get_tasks()
     try:
         loop = asyncio.get_event_loop() # Let's get/create an event loop
         # tasks = [asyncio.create_task(handler) for handler in task_list]
@@ -31,4 +54,4 @@ def run_tasks( *tasks ):
         # task.cancel() stops the task
         [task.cancel() for task in asyncio.Task.all_tasks()]# if not task.done()]
     finally:
-        task_list = []
+        task_list.clear_tasks()
