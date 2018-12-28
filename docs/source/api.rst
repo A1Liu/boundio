@@ -93,17 +93,21 @@ This subpackage is equivalent to :py:mod:`boundio.asynchronous.raw_io.stdin`.
 	For more examples, see :py:mod:`boundio.examples`.
 
 ``boundio.asynchronous``
--------------------
+-------------------------
 This subpackage includes functions for interacting with raw IO asynchronously.
-..  For more information on this subpackage, see the :py:mod:`boundio.asynchronous` documentation.
+
+..
+	For more information on this subpackage, see the :py:mod:`boundio.asynchronous` documentation.
 
 ``boundio.sockets``
 ----------------------
 .. py:currentmodule:: boundio.sockets
 
 This subpackage includes functions for reading from sockets asynchronously.
-..  For more information on this subpackage, see the :py:mod:`boundio.sockets` documentation.
 The following are only the public functions in the package.
+
+..
+	For more information on this subpackage, see the :py:mod:`boundio.sockets` documentation.
 
 ..  py:function::
 	boundio.sockets.get_socket_task
